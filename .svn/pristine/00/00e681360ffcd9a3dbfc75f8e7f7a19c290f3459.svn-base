@@ -1,0 +1,51 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>图书借阅平台后台管理系统</title>
+<link rel="stylesheet" href="/css/layui.css">
+<link rel="stylesheet" href="/font/iconfont.css">
+<link rel="stylesheet" href="/css/index.css">
+<link rel="stylesheet" href="https://www.baidu.com">
+<link rel="stylesheet" href="/css/modules/layer/default/layer.css">
+<script type="text/javascript" src="/modules/jquery-1.8.3.js"></script>
+<script type="text/javascript" src="/layui.js"></script>
+<script type="text/javascript" src="/modules/layer.js"></script>
+<script type="text/javascript" src="/js/login.js"></script>
+<script type="text/javascript" src="/js/md.js"></script>
+
+</head>
+<body>
+	<div class="login-logo">
+		<i></i>
+	</div>
+	<div class="login-middle">
+		<div class="content">
+			<ul>
+				<li><span class="input-label"><i
+						class="iconfont icon-yonghu1"></i></span> <span class="input-title">用户名</span>
+					<input type="text" class="input-box" placeholder="用户名"
+					id="adminname"></li>
+
+				<li><span class="input-label"><i
+						class="iconfont icon-suo1"></i></span> <span class="input-title">密
+						&nbsp;&nbsp;码</span> <input type="password" class="input-box"
+					placeholder="密码" id="adminpwd"></li>
+
+				<!--<li class="code-box"><span class="input-label">
+				<i class="iconfont icon-dunpai" style="font-size: 16px"></i></span> 
+				<span class="input-title">éªè¯ç ï¼</span> 
+				<input type="text"	class="input-box" placeholder="">
+					<div class="code">
+						<img src="../img/login-back.jpg"> <span>æ¢ä¸å¼ </span>
+					</div></li> -->
+					<input type="hidden" value="${pageContext.request.contextPath}"
+					id="path">
+				<li class="btn-login" id="loginBtn">登 录</li>
+			</ul>
+		</div>
+	</div>
+</body>
+</html>

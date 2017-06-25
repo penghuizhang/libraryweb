@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.library.dao.AdminMapper">
+	<resultMap id="BaseResultMap" type="com.library.entity.Admin">
+		<id column="adminID" property="adminid" jdbcType="INTEGER" />
+		<result column="adminName" property="adminname" jdbcType="VARCHAR" />
+		<result column="adminAccount" property="adminaccount" jdbcType="VARCHAR" />
+		<result column="adminPwd" property="adminpwd" jdbcType="VARCHAR" />
+		<result column="adminPhone" property="adminphone" jdbcType="VARCHAR" />
+		<result column="adminqx" property="adminqx" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		adminID, adminName, adminAccount, adminPwd,
+		adminPhone,adminqx
+	</sql>
+
+	<!-- 根据ID查询 -->
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from admin
+		where adminID = #{adminid,jdbcType=INTEGER}
+	</select>
+
+	<!-- 删除 -->
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from admin
+		where adminID = #{adminid,jdbcType=INTEGER}
+	</delete>
+
+	<!-- 添加 -->
+	<insert id="insertSelective" parameterType="com.library.entity.Admin"
+		useGeneratedKeys="true" keyProperty="adminid">
+		insert into admin
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+
+			<if test="adminname != null">
+				adminName,
+			</if>
+			<if test="adminaccount != null">
+				adminAccount,
+			</if>
+			<if test="adminpwd != null">
+				adminPwd,
+			</if>
+			<if test="adminphone != null">
+				adminPhone,
+			</if>
+			<if test="adminqx != null">
+				adminqx,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+
+			<if test="adminname != null">
+				#{adminname,jdbcType=VARCHAR},
+			</if>
+			<if test="adminaccount != null">
+				#{adminaccount,jdbcType=VARCHAR},
+			</if>
+			<if test="adminpwd != null">
+				#{adminpwd,jdbcType=VARCHAR},
+			</if>
+			<if test="adminphone != null">
+				#{adminphone,jdbcType=VARCHAR},
+			</if>
+			<if test="adminqx != null">
+				'hehe'
+			</if>
+		</trim>
+	</insert>
+
+	<!-- 修改 -->
+	<update id="updateByPrimaryKeySelective" parameterType="com.library.entity.Admin">
+		update admin
+		<set>
+			<if test="adminname != null">
+				adminName = #{adminname,jdbcType=INTEGER},
+			</if>
+			<if test="adminaccount != null">
+				adminAccount = #{adminaccount,jdbcType=VARCHAR},
+			</if>
+			<if test="adminpwd != null">
+				adminPwd = #{adminpwd,jdbcType=VARCHAR},
+			</if>
+			<if test="adminphone != null">
+				adminPhone = #{adminphone,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where adminID = #{adminid,jdbcType=INTEGER}
+	</update>
+
+	<select id="selCountByPage" parameterType="com.library.entity.Admin"
+		resultType="java.lang.Integer">
+		select COUNT(*) from admin where 1=1
+		<if test="adminaccount != null and adminaccount != ''">
+			and adminAccount like
+			CONCAT('%',#{adminaccount,jdbcType=VARCHAR},'%')
+		</if>
+		<if test="adminname!=null and adminname !=''">
+			and adminName=#{adminname,jdbcType=VARCHAR}
+		</if>
+		<if test="adminqx != null and adminqx != ''">
+			and adminqx =#{adminqx}
+		</if>
+	</select>
+
+	<select id="selData" parameterType="com.library.entity.Admin"
+		resultMap="BaseResultMap">
+		select * from admin where 1=1
+		<if test="adminaccount != null and adminaccount != ''">
+			and adminAccount like
+			CONCAT('%',#{adminaccount,jdbcType=VARCHAR},'%')
+		</if>
+	</select>
+
+	<!-- login -->
+	<select id="login" parameterType="com.library.entity.Admin"
+		resultMap="BaseResultMap">
+		select * from admin where
+		adminName=#{adminname,jdbcType=VARCHAR}
+	</select>
+	<!-- 查询单个 -->
+	<select id="selMyself" parameterType="com.library.entity.Admin"
+		resultMap="BaseResultMap">
+		select * from admin where adminName=#{adminname}
+		<if test="adminqx != null and adminqx != ''">
+			and adminqx =#{adminqx}
+		</if>
+	</select>
+</mapper>

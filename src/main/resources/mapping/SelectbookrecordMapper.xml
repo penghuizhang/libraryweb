@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.library.dao.SelectBookRecordMapper">
+	<resultMap id="BaseResultMap" type="com.library.entity.Selectbookrecord">
+		<result column="uname" property="uname" jdbcType="VARCHAR" />
+		<result column="borrowTime" property="borrowtime" jdbcType="TIMESTAMP" />
+		<result column="title" property="title" jdbcType="VARCHAR" />
+		<result column="adminName" property="adminname" jdbcType="VARCHAR" />
+		<result column="borrowRecordId" property="borrowRecordid"
+			jdbcType="VARCHAR" />
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		uname, borrowTime, title, adminName,borrowRecordId
+	</sql>
+
+	<select id="selectByExample" resultMap="BaseResultMap"
+		parameterType="com.library.entity.Selectbookrecord">
+		select
+		<if test="distinct">
+			distinct
+		</if>
+		<include refid="Base_Column_List" />
+		from selectBookRecord
+
+		<if test="orderByClause != null">
+			order by ${orderByClause}
+		</if>
+	</select>
+
+	<select id="countByExample" parameterType="com.library.entity.Selectbookrecord"
+		resultType="java.lang.Integer">
+		select count(*) from selectBookRecord
+	</select>
+
+
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		select * from selectBookRecord
+		where borrowRecordId =
+		#{borrowRecordid,jdbcType=CHAR}
+	</select>
+
+	<select id="selCountDataByPage" parameterType="com.library.entity.Selectbookrecord"
+		resultType="java.lang.Integer">
+		SELECT COUNT(*) FROM selectBookRecord where 1=1
+		<if test="uname!=null and uname!=''">
+			and uname LIKE CONCAT('%',#{uname},'%')
+		</if>
+
+	</select>
+	<select id="selDataByPage" parameterType="com.library.entity.Selectbookrecord"
+		resultMap="BaseResultMap">
+
+		select * from selectBookRecord where 1=1
+		<if test="uname!=null and uname!=''">
+			and uname LIKE CONCAT('%',#{uname},'%')
+		</if>
+		LIMIT
+		#{begin},#{end}
+	</select>
+</mapper>
